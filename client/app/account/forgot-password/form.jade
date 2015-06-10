@@ -1,0 +1,27 @@
+form(name="form" ng-submit="resetPassword(form)" novalidate)
+  div.form-group
+    label(for="name") Email
+    input.form-control(name="email" ng-model="email" type="email" required="true" email-validator ng-trim="true")
+
+  div.form-group
+    p: code(ng-show="form.email.$error.required && submitted")
+      | Email address is required.
+    p: code(ng-show="form.email.$error.email && submitted")
+      | Invalid email address format.
+    p: code(ng-show="errors.other" ng-bind="errors.other")
+
+  div
+    p(ng-show="try")
+      span.fa.fa-spinner.fa-spin
+      = ' Trying to reset password...'
+
+  div.form-group
+    button.btn.btn-success(type="submit" ng-disabled="try") Reset Password
+
+div(ng-show="registerd")
+  div.alert.alert-success
+    p
+      = 'Your password is changed and the new password was sent your email. Check your email and try '
+      a(href="/login") login
+      = ' please.'
+

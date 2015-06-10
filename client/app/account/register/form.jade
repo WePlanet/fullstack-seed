@@ -1,0 +1,31 @@
+form(name="form" ng-submit="register(form)" novalidate)
+  div.form-group
+    label(for="email") Email
+    input.form-control(name="email" ng-model="user.email" type="email" required="true" email-validator ng-trim="true" autofocus)
+  div.form-group
+    label(for="password") Password
+    input.form-control(name="password" ng-model="user.password" type="password" required="true" ng-minlength="6")
+
+  div
+    p: code(ng-show="(form.email.$error.required || form.password.$error.required) && submitted")
+      | Email address and password are requred.
+    p: code(ng-show="form.email.$error.email && submitted")
+      | Invalid email address format
+    p: code(ng-show="form.password.$error.minlength && submitted")
+      | Password should be longer than 6 charactors
+    p: code(ng-show="errors.other" ng-bind="errors.other")
+
+  div
+    p(ng-show="try")
+      span.fa.fa-spinner.fa-spin
+      = ' Trying register...'
+
+  div.form-group
+    button.btn.btn-success(type="submit") 회원가입
+
+div(ng-show="registerd")
+  div.alert.alert-success
+    p
+      = 'You are registerd. Please login by {{user.email}}. Go to '
+      a(href="/login") login
+      = '.'

@@ -1,0 +1,24 @@
+form(name="form" ng-submit="login(form)" novalidate)
+  div.form-group
+    label(for="email") Email
+    input.form-control(type="email" name="email" ng-model="user.email" ng-trim="true" required email-validator autofocus)
+  div.form-group
+    label(for="password") 비밀번호
+    input.form-control(type="password" name="password" ng-model="user.password" ng-minlength="6" required)
+
+  div
+    p: code(ng-show="(form.email.$error.required || form.password.$error.required) && submited")
+      | Email address and password are required.
+    p: code(ng-show="form.email.$error.email && submited")
+      | Invalid email address format.
+    p: code(ng-show="form.password.$error.minlength && submited")
+      | Password should be longer than 6 charactors
+    p: code(ng-show="errors.other" ng-bind="errors.other && submited")
+
+  div
+    p(ng-show="try")
+      span.fa.fa-spinner.fa-spin
+      = ' Trying login...'
+
+  div.form-group
+    button.btn.btn-success(type="submit" ng-disabled="try") Login
