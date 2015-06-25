@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./expense.controller');
+var controller = require('./thing.controller');
 var Joi = require('express-joi').Joi;
 var joiValidate = require('express-joi').joiValidate;
 var auth = require('../../auth/auth.service');

@@ -1,22 +1,23 @@
 'use strict'
 
 angular.module 'moneyApp'
-.controller 'MainCtrl', ($scope, Thing) ->
+.controller 'MainCtrl', ($scope, Thing, $http, socket) ->
 
-  $scope.awesomeThings = Thing.query()
+  $scope.awesomeThings = []
+
+  $http.get('/api/things')
+  .success (awesomeThings) ->
+    $scope.awesomeThings = awesomeThings
+    socket.syncUpdates 'thing', $scope.awesomeThings
 
   $scope.addThing = ->
-    return if $scope.newThing is ''
-    Thing.save name: $scope.newThing
-    .$promise
-    .then (newThing) ->
-      $scope.awesomeThings.push newThing
-      $scope.newThing = ''
+    return if $scope.newThing == ''
+    $http.post '/api/things', name: $scope.newThing
+    $scope.newThing = ''
 
   $scope.deleteThing = (thing) ->
-    Thing.remove id: thing.id
-    .$promise
-    .then ->
-      _.remove $scope.awesomeThings, (n) ->
-        n.id is thing.id
+    $http.delete '/api/things/' + thing.id
+
+  $scope.$on '$destroy', ->
+    socket.unsyncUpdates 'thing'
 

@@ -14,6 +14,11 @@ var config = require('./config/environment');
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
+var socketio = require('socket.io')(server, {
+  serverClient: config.env !== 'production', // TODO ?
+  path: '/socket.io-client' // TODO ?
+});
+require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./config/passport')(app);
 require('./routes')(app);
