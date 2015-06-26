@@ -19,7 +19,8 @@ exports.create = function (req, res) {
     name: req.body.name
   }).then(function (thing) {
     res.json(201, thing)
-  }).catch(function (error) {
+  }, function (error) {
+    console.error(error);
     res.send(500, error);
   });
 };
@@ -29,8 +30,9 @@ exports.destroy = function (req, res) {
   Thing.find(req.params.id).then(function (thing) {
     if (!thing) return res.send(404);
     thing.destroy().then(function () {
-      res.send(204);
-    }).catch(function (error) {
+      res.send(200, thing);
+    }, function (error) {
+      console.error(error);
       res.send(500, error);
     });
   });

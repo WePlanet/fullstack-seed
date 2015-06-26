@@ -4,6 +4,7 @@ angular.module 'moneyApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'btford.socket-io',
   'ui.router'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
