@@ -20,10 +20,10 @@ exports.register = function(socket) {
   });
 };
 
-function onSave(socket, thing, cb) {
+function onSave(socket, thing) {
   socket.emit('thing:save', thing);
 }
 
-function onRemove(socket, doc, cb) {
-  socket.emit('thing:remove', doc);
+function onRemove(socket, thing) {
+  socket.emit('thing:remove', thing);
 }
