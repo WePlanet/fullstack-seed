@@ -8,8 +8,17 @@
  * App-wide Styles
  */
 
+@sidebar-width: 180px;
+@navbar-min-width: 1000px;
+@navbar-min-height: 40px;
+
 main {
-  margin-top: 50px;
+  margin-top: @navbar-min-height;
+  padding-left: @sidebar-width;
+}
+
+.container {
+  min-width: @navbar-min-width - @sidebar-width;
 }
 
 

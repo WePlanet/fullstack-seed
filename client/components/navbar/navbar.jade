@@ -1,26 +1,18 @@
 header(ng-controller="NavbarCtrl")
   nav.navbar.navbar-inverse.navbar-fixed-top
-    div.container
-      div.navbar-header
-        button.navbar-toggle(type="button" data-toggle="collapse" data-target="#navbar" ng-click="isCollapsed = !isCollapsed")
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand(href="/") Site Name
-      div#navbar.navbar-collapse.collapse
-        ul.nav.navbar-nav.navbar-right
-          li(ng-hide="isLoggedIn()"): a(href="/login") Login
-          li(ng-hide="isLoggedIn()"): a(href="/register") Register
-          li(ng-hide="isLoggedIn()"): a(href="/forgot-password") Forgot password
-          li(ng-show="isLoggedIn()"): p.navbar-text Hello {{getCurrentUser().name}}
-          li(ng-show="isLoggedIn()"): a(href="" ng-click="logout()") Logout
+    div.navbar-header
+      a.navbar-brand(href="/") Site Name
+    div
+      ul.nav.navbar-nav.navbar-right
+        li(ng-hide="isLoggedIn()"): a(href="/login") Login
+        li(ng-hide="isLoggedIn()"): a(href="/register") Register
+        li(ng-hide="isLoggedIn()"): a(href="/forgot-password") Forgot password
+        li(ng-show="isLoggedIn()"): p.navbar-text Hello {{getCurrentUser().name}}
+        li(ng-show="isLoggedIn()"): a(href="" ng-click="logout()") Logout
 
-  div.container
-    div.row
-      div.col-xs-3.sidebar
-        ul.nav.nav-sidebar
-          li(ng-repeat="item in menu" ng-class="{active: isActive(item.link)}")
-            a(ng-href="{{item.link}}" ng-bind="item.title")
-          li(ng-repeat="item in adminMenu" ng-class="{active: isActive(item.link)}" ng-show="isAdmin()" )
-            a(ng-href="{{item.link}}" ng-bind="item.title")
+  div.sidebar
+    ul.nav.nav-sidebar
+      li(ng-repeat="item in menu" ng-class="{active: isActive(item.link)}")
+        a(ng-href="{{item.link}}" ng-bind="item.title")
+      li(ng-repeat="item in adminMenu" ng-class="{active: isActive(item.link)}" ng-show="isAdmin()" )
+        a(ng-href="{{item.link}}" ng-bind="item.title")

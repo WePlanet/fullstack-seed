@@ -1,6 +1,35 @@
+.navbar {
+  min-width: @navbar-min-width;
+  min-height: @navbar-min-height;
+  .navbar-header {
+    float: left;
+    .navbar-brand {
+      padding: 10px 15px;
+      height: @navbar-min-height;
+    }
+  }
+  .navbar-nav {
+    margin: 0;
+    li {
+      float: left;
+      a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  }
+  .navbar-right {
+    float: right;
+  }
+  .navbar-text {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 .sidebar {
   position: fixed;
-  top: 51px;
+  top: @navbar-min-height + 1px;
   bottom: 0;
   left: 0;
   z-index: 1000;
@@ -10,12 +39,11 @@
   overflow-y: auto;
   background-color: #f5f5f5;
   border-right: 1px solid #eee;
-
+  width: @sidebar-width;
   .nav-sidebar {
     margin-right: -21px;
     margin-bottom: 20px;
     margin-left: -20px;
-
     .active {
       a {
         background-color: @brand-primary;
@@ -25,7 +53,3 @@
   }
 }
 
-.navbar-text {
-  padding-left: 15px;
-  padding-right: 15px;
-}
