@@ -20,4 +20,4 @@ angular.module 'moneyApp'
       $location.path '/'
     .catch (err) ->
       delete $scope.try
-      $scope.errors.other = '인증실패. 다시 시도하세요.'
+      $scope.errors.other = err.message
