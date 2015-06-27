@@ -8,14 +8,15 @@ angular.module 'moneyApp'
 
   $scope.register = (form) ->
     $scope.submitted = true
+    $scope.errors = {}
     return if form.$invalid
 
     $http.post '/api/users', {email: form.email.$modelValue, password: form.password.$modelValue}
-    .success (data) ->
+    .success () ->
       $scope.registerd = true
     .error (error) ->
       if error.name is 'SequelizeUniqueConstraintError'
-        $scope.errors.other = '이미 등록된 이메일입니다.'
+        $scope.errors.other = 'The email is already registerd.'
       else
-        $scope.errors.other = '등록에 실패하였습니다.'
+        $scope.errors.other = 'Sorry registration is fail.'
 
