@@ -1,6 +1,30 @@
 'use strict'
 
 angular.module 'moneyApp'
+.provider '$exceptionHandler', $get: (ExceptionLogToServer) ->
+  return ExceptionLogToServer
+
+angular.module 'moneyApp'
+.factory 'ExceptionLogToServer', ($log, $window) ->
+  error = (exception, cause) ->
+    $log.error.apply $log, arguments
+    body =
+      url: $window.location.href
+      stackTrace: printStackTrace
+        e: exception
+      agent: 'Chrome'
+
+    try
+      $.ajax
+        type: 'POST'
+        url: '/api/logs',
+        data:
+          tag: 'exception'
+          logCode: 'E001'
+          body: angular.toJson body
+  error
+
+angular.module 'moneyApp'
 .factory 'Log', ($http) ->
 
   send = (tag, logCode, body) ->
@@ -22,21 +46,3 @@ angular.module 'moneyApp'
   warn: warn
   error: error
   exception: exception
-
-angular.module 'moneyApp'
-.provider '$exceptionHandler', $get: (ExceptionLogToServer) ->
-  return ExceptionLogToServer
-
-angular.module 'moneyApp'
-.factory 'ExceptionLogToServer', ($log, $window) ->
-  error = (exception, cause) ->
-    $log.error.apply $log, arguments
-    try
-      $.ajax
-        type: 'POST'
-        url: '/api/logs',
-        data:
-          tag: 'exception'
-          logCode: 'E001'
-          body: 'data'
-  error

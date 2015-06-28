@@ -20,6 +20,3 @@ angular.module 'moneyApp'
 
   $scope.$on '$destroy', ->
     socket.unsyncUpdates 'thing'
-
-
-  foo = voo

@@ -70,6 +70,11 @@ function signToken(id, role) {
   return jwt.sign({id: id, role: role}, config.secrets.session, {expiresInMinutes: 60 * 5}); // 5 hours
 }
 
+function decodeToken() {
+  return expressJwt({secret: config.secrets.session});
+}
+
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
 exports.signToken = signToken;
+exports.decodeToken = decodeToken;

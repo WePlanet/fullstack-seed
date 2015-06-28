@@ -10,11 +10,10 @@ angular.module 'moneyApp'
 
   $scope.menu = [
     {link: '/menu1', title: 'Menu 1'},
-    {link: '/menu2', title: 'Menu 2'},
-    {link: '/menu3', title: 'Menu 3'}
   ]
 
   $scope.adminMenu = [
-    {link: '/admin', title: 'Admin'}
+    {link: '/operators', title: 'Operators'}
+    {link: '/logs', title: 'Logs'}
   ]
 

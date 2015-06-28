@@ -1,0 +1,22 @@
+div(ng-include='"components/navbar/navbar.html"')
+div(ng-include='"components/sidebar/sidebar.html"')
+
+main
+  h1 This page is only for admin
+  h2 Logs:
+  table.table
+    thead
+      tr
+        th ID
+        th Tag
+        th Message
+        th User
+        th Created at
+    tbody
+      tr(ng-repeat="log in logs")
+        td(ng-bind="log.id")
+        td(ng-bind="log.tag")
+        td(ng-bind="log.LogCode.message")
+        td: span(ng-show="log.User" ng-bind="log.User.name")
+        td(ng-bind="log.createdAt | date:'yyyy-MM-dd hh:mm:ss a'")
+div(ng-include='"components/footer/footer.html"')

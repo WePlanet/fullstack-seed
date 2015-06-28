@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var models = require('../../models');
+var config = require('../../config/environment');
+var jwt = require('jsonwebtoken');
 
 // Get list of logs
 exports.index = function (req, res) {
@@ -34,20 +36,7 @@ exports.create = function (req, res) {
   });
 };
 
-// New exception log
-exports.createException = function (req, res) {
-  models.Log.create({
-    tag: req.body.tag,
-    body: req.body.body,
-    LogCodeId: req.body.logCode,
-    UserId: null
-  }).then(function (log) {
-    res.json(201, log)
-  }, function (err) {
-    console.error(err);
-    res.send(500, err);
-  });
-};
+
 
 // Remove a thing
 //exports.destroy = function (req, res) {

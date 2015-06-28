@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'moneyApp'
-.controller 'AdminCtrl', ($scope, $http) ->
+.controller 'OperatorsCtrl', ($scope, $http) ->
 
   $http.get '/api/users'
   .success (data) ->
