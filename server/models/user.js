@@ -1,5 +1,7 @@
 'use strict';
 
+var config = require('../config/environment');
+
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     id: {
@@ -25,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     role: {
-      type: DataTypes.ENUM('user', 'operator', 'admin'),
+      type: DataTypes.ENUM(config.userRoles),
       allowNull: false,
       defaultValue: 'user'
     }

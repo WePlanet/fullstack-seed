@@ -11,12 +11,17 @@ angular.module 'moneyApp'
     url: '/register'
     templateUrl: 'app/account/register/register.html'
     controller: 'RegisterCtrl'
-  .state 'reset-password',
-    url: '/reset-password'
-    templateUrl: 'app/account/reset-password/reset-password.html'
-    controller: 'ResetPasswordCtrl'
-    authenticate: true
   .state 'forgot-password',
     url: '/forgot-password'
     templateUrl: 'app/account/forgot-password/forgot-password.html'
     controller: 'ForgotPasswordCtrl'
+  .state 'change-password',
+    url: '/change-password'
+    templateUrl: 'app/account/change-password/change-password.html'
+    controller: 'ChangePasswordCtrl'
+    authenticate: true
+  .state 'settings',
+    url: '/settings'
+    templateUrl: 'app/account/settings/settings.html'
+    controller: 'SettingsCtrl'
+    authenticate: true

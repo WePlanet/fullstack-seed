@@ -3,7 +3,7 @@
 var path = require('path');
 var _ = require('lodash');
 var dbConfig = require('../config.json')[process.env.NODE_ENV];
-var emailConfig = require('../email-config.json')[process.env.NODE_ENV];
+var emailConfig = require('../emailConfig.json')[process.env.NODE_ENV];
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -32,7 +32,7 @@ var all = {
   },
 
   // List of user roles
-  userRoles: ['user', 'admin'],
+  userRoles: ['user', 'operator', 'admin'],
 
   // Mysql
   mysql: {

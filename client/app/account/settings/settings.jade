@@ -1,0 +1,23 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+main.no-sidebar
+  h1 Settings
+
+  ul
+    li ID: {{user.id}}
+    li Email: {{user.email}}
+    li Name: {{user.name}}
+    li Role: {{user.role}}
+    li Created At: {{user.createdAt | date:'yyyy-MM-dd hh:mm:ss'}}
+    li Updated At: {{user.updatedAt | date:'yyyy-MM-dd hh:mm:ss'}}
+
+  button.btn.btn-default(ng-click="onEditProfile()") Edit Profile
+
+  form(ng-show="editMode" name="form" ng-submit="save(form)")
+    input(type="text" ng-model="editedUser.name" name="name")
+    input(type="submit" value="Save")
+    p(ng-show="isSaving") Saving...
+
+  p: a(href="/change-password") Change Password
+
+div.no-sidebar(ng-include='"components/footer/footer.html"')

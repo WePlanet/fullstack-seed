@@ -14,11 +14,20 @@
 
 main {
   margin-top: @navbar-min-height;
-  padding-left: @sidebar-width;
+  padding: 15px;
+  padding-left: @sidebar-width + 15px;
+
+  &.no-sidebar {
+    padding-left: 15px;
+  }
 }
 
 .container {
   min-width: @navbar-min-width - @sidebar-width;
+}
+
+pre {
+  font-size: 10px;
 }
 
 
@@ -26,7 +35,6 @@ main {
 @import 'account/forgot-password/forgot-password.less';
 @import 'account/login/login.less';
 @import 'account/register/register.less';
-@import 'account/reset-password/reset-password.less';
 @import 'admin/admin.less';
 @import 'main/main.less';
 @import 'menu1/menu1.less';
@@ -35,4 +43,5 @@ main {
 @import 'directives/datepicker/datepicker.less';
 @import 'footer/footer.less';
 @import 'navbar/navbar.less';
+@import 'sidebar/sidebar.less';
 // endinjector

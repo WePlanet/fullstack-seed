@@ -7,10 +7,3 @@ header(ng-controller="NavbarCtrl")
         li(ng-show="isLoggedIn()"): p.navbar-text Hello {{getCurrentUser().name}}
         li(ng-show="isLoggedIn()"): a(href="/settings") Settings
         li(ng-show="isLoggedIn()"): a(href="" ng-click="logout()") Logout
-
-  div.sidebar
-    ul.nav.nav-sidebar
-      li(ng-repeat="item in menu" ng-class="{active: isActive(item.link)}")
-        a(ng-href="{{item.link}}" ng-bind="item.title")
-      li(ng-repeat="item in adminMenu" ng-class="{active: isActive(item.link)}" ng-show="isAdmin()" )
-        a(ng-href="{{item.link}}" ng-bind="item.title")

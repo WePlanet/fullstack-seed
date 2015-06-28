@@ -5,7 +5,5 @@ public
 client/bower_components
 dist
 /server/config/local.env.js
-
-server/config/config.json
-
-server/config/email-config.json
+/server/config/config.json
+server/config/emailConfig.json

@@ -17,15 +17,15 @@ exports.index = function (req, res) {
 
 // Get the user
 exports.me = function (req, res) {
-  console.log(req.user);
   models.User.find({
     attributes: ['id', 'name', 'email', 'role', 'createdAt', 'updatedAt'],
     where: {id: req.user.id}
   }).then(function (user) {
     if (!user) return res.send(404);
     res.json(user);
-  }).catch(function (err) {
-    req.status(403);
+  }, function (err) {
+    console.error(err);
+    req.send(403, err);
   });
 };
 
@@ -57,20 +57,18 @@ exports.update = function (req, res) {
     return res.status(400).send();
   }
 
-  models.User.find({where: {id: req.user.id}})
-      .then(function (user) {
-        user.updateAttributes(updateValues)
-            .then(function (data) {
-              req.session.destroy();
-              res.json(data);
-            })
-            .catch(function (err) {
-              res.send(400, err);
-            })
-      })
-      .catch(function (err) {
-        res.status(400).json(err);
-      });
+  models.User.find({
+    where: {id: req.user.id}
+  }).then(function (user) {
+    user.updateAttributes(updateValues)
+        .then(function (data) {
+          res.json(data);
+        }, function (err) {
+          res.send(400, err);
+        });
+  }, function (err) {
+    res.status(400).json(err);
+  });
 };
 
 // Remove user
