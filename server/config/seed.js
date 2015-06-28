@@ -5,6 +5,7 @@ var models = require('../models');
 
 
 models.LogCode.bulkCreate([
+  {id: 'E001', message: 'Browser exception'},
   {id: 'U001', message: 'Register fail'},
   {id: 'U002', message: 'Register success'},
   {id: 'O001', message: 'Operator Login fail'},

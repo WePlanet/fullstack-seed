@@ -22,3 +22,21 @@ angular.module 'moneyApp'
   warn: warn
   error: error
   exception: exception
+
+angular.module 'moneyApp'
+.provider '$exceptionHandler', $get: (ExceptionLogToServer) ->
+  return ExceptionLogToServer
+
+angular.module 'moneyApp'
+.factory 'ExceptionLogToServer', ($log, $window) ->
+  error = (exception, cause) ->
+    $log.error.apply $log, arguments
+    try
+      $.ajax
+        type: 'POST'
+        url: '/api/logs',
+        data:
+          tag: 'exception'
+          logCode: 'E001'
+          body: 'data'
+  error

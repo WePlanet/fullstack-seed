@@ -25,7 +25,7 @@ exports.create = function (req, res) {
     tag: req.body.tag,
     body: req.body.body,
     LogCodeId: req.body.logCode,
-    UserId: req.user.id
+    UserId: req.user ? req.user.id : null
   }).then(function (log) {
     res.json(201, log)
   }, function (err) {
@@ -33,8 +33,23 @@ exports.create = function (req, res) {
     res.send(500, err);
   });
 };
-//
-//// Remove a thing
+
+// New exception log
+exports.createException = function (req, res) {
+  models.Log.create({
+    tag: req.body.tag,
+    body: req.body.body,
+    LogCodeId: req.body.logCode,
+    UserId: null
+  }).then(function (log) {
+    res.json(201, log)
+  }, function (err) {
+    console.error(err);
+    res.send(500, err);
+  });
+};
+
+// Remove a thing
 //exports.destroy = function (req, res) {
 //  Thing.find(req.params.id).then(function (thing) {
 //    if (!thing) return res.send(404);
