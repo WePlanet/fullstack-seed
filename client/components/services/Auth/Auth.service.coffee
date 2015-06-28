@@ -39,7 +39,8 @@ angular.module 'moneyApp'
   isLoggedIn = ->
     currentUser.hasOwnProperty 'role'
 
-  getCurrentUser = ->
+  getCurrentUser = (options)->
+    currentUser = User.get() if options && options.refresh
     currentUser
 
   isAdmin = ->
