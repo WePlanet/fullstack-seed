@@ -5,6 +5,9 @@ form(name="form" ng-submit="register(form)" novalidate)
   div.form-group
     label(for="password") Password
     input.form-control(name="password" ng-model="user.password" type="password" required="true" ng-minlength="6")
+  div.form-group
+    label(for="repassword") Re-Password
+    input.form-control(name="repassword" ng-model="repassword" type="password" required="true" validate-equals="user.password")
 
   div
     p: code(ng-show="(form.email.$error.required || form.password.$error.required) && submitted")
@@ -13,6 +16,8 @@ form(name="form" ng-submit="register(form)" novalidate)
       | Invalid email address format
     p: code(ng-show="form.password.$error.minlength && submitted")
       | Password should be longer than 6 charactors
+    p: code(ng-show="form.repassword.$error.equal && submitted")
+      | Re-Password should be equal to password
     p: code(ng-show="errors.other" ng-bind="errors.other")
 
   div
@@ -22,7 +27,9 @@ form(name="form" ng-submit="register(form)" novalidate)
 
   div.form-group
     button.btn.btn-success(type="submit") Register
-    a.btn.btn-default(href="/") Cancel
+  ul.list-unstyled
+    li: a(href="/login") Login
+    li: a(href="/forgot-password") Forgot password
 
 div(ng-show="registerd")
   div.alert.alert-success

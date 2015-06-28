@@ -22,4 +22,6 @@ form(name="form" ng-submit="login(form)" novalidate)
 
   div.form-group
     button.btn.btn-success(type="submit" ng-disabled="try") Login
-    a.btn.btn-default(href="/") Cancel
+  ul.list-unstyled
+    li: a(href="/register") Register
+    li: a(href="/forgot-password") Forgot password

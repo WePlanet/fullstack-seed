@@ -1,6 +1,6 @@
 form(name="form" ng-submit="resetPassword(form)" novalidate)
   div.form-group
-    label(for="name") Email
+    label(for="name") Email Address
     input.form-control(name="email" ng-model="email" type="email" required="true" email-validator ng-trim="true")
 
   div.form-group
@@ -17,6 +17,9 @@ form(name="form" ng-submit="resetPassword(form)" novalidate)
 
   div.form-group
     button.btn.btn-success(type="submit" ng-disabled="try") Reset Password
+  ul.list-unstyled
+    li: a(href="login") Login
+    li: a(href="register") Register
 
 div(ng-show="registerd")
   div.alert.alert-success

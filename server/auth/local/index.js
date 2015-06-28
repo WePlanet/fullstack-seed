@@ -7,7 +7,7 @@ var joiValidate = require('express-joi').joiValidate;
 var auth = require('../auth.service');
 var cryptoHelper = require('../../components/crypto-helper');
 var email = require('../../components/email');
-var models = require('../../models');
+var User = require('../../models').User;
 var router = express.Router();
 
 var schema = {
@@ -34,7 +34,7 @@ function resetPassword(req, res) {
   var newPassword = new Date().getTime().toString().substring(6, 12);
   var newPassword2 = cryptoHelper.md5(newPassword);
 
-  models.User.findOne({where: {email: req.body.email}}).then(function (user) {
+  User.findOne({where: {email: req.body.email}}).then(function (user) {
     if (!user) return res.status(404).send();
     user.updateAttributes({password: newPassword2})
         .then(function (affectedCount) {

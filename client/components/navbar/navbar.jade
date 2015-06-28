@@ -4,10 +4,8 @@ header(ng-controller="NavbarCtrl")
       a.navbar-brand(href="/") Site Name
     div
       ul.nav.navbar-nav.navbar-right
-        li(ng-hide="isLoggedIn()"): a(href="/login") Login
-        li(ng-hide="isLoggedIn()"): a(href="/register") Register
-        li(ng-hide="isLoggedIn()"): a(href="/forgot-password") Forgot password
         li(ng-show="isLoggedIn()"): p.navbar-text Hello {{getCurrentUser().name}}
+        li(ng-show="isLoggedIn()"): a(href="/settings") Settings
         li(ng-show="isLoggedIn()"): a(href="" ng-click="logout()") Logout
 
   div.sidebar
