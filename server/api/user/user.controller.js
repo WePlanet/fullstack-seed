@@ -1,12 +1,14 @@
 'use strict';
 
 var _ = require('lodash');
-var models = require('../../models');
+var config = require('../../config/environment');
+var User = require('../../models').User;
 var cryptoHelper = require('../../components/crypto-helper');
+var awsHelper = require('../../components/aws-helper');
 
 // Get list of users
 exports.index = function (req, res) {
-  models.User.findAll()
+  User.findAll()
       .then(function (users) {
         res.json(users);
       })
@@ -17,11 +19,11 @@ exports.index = function (req, res) {
 
 // Get the user
 exports.me = function (req, res) {
-  models.User.find({
-    attributes: ['id', 'name', 'email', 'role', 'createdAt', 'updatedAt'],
+  User.find({
     where: {id: req.user.id}
   }).then(function (user) {
     if (!user) return res.send(404);
+    delete user.password;
     res.json(user);
   }, function (err) {
     console.error(err);
@@ -31,7 +33,7 @@ exports.me = function (req, res) {
 
 // Create new user
 exports.create = function (req, res) {
-  models.User.create({
+  User.create({
     email: req.body.email,
     password: cryptoHelper.md5(req.body.password),
     name: req.body.name || ''
@@ -57,7 +59,7 @@ exports.update = function (req, res) {
     return res.status(400).send();
   }
 
-  models.User.find({
+  User.find({
     where: {id: req.user.id}
   }).then(function (user) {
     user.updateAttributes(updateValues)
@@ -71,9 +73,37 @@ exports.update = function (req, res) {
   });
 };
 
+exports.uploadProfileImg = function (req, res) {
+  var profileImgUrl = 'profile/' + req.user.id;
+  var buf = new Buffer(req.body.data.replace(/^data:image\/\w+;base64,/, ""),'base64');
+  awsHelper.uploadFile({
+    path: profileImgUrl,
+    data: buf
+  }).then(function(data) {
+    User.find({
+      where: {id: req.user.id}
+    }).then(function (user) {
+      user.updateAttributes({
+        profileImg: config.aws.s3Bucket.url + '/' + profileImgUrl
+      }).then(function (data) {
+        res.json(data);
+      }, function (err) {
+        console.error(err);
+        res.send(500, err);
+      });
+    }, function (err) {
+      console.error(err);
+      res.send(500, err);
+    });
+  }, function(err) {
+    console.error(err);
+    res.send(500, err);
+  })
+};
+
 // Remove user
 exports.remove = function (req, res) {
-  models.User.destroy({where: {id: req.user.id}})
+  User.destroy({where: {id: req.user.id}})
       .then(function (affectedRows) {
         if (affectedRows) {
           req.session.destroy();

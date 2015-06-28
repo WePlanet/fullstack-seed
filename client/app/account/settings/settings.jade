@@ -3,15 +3,19 @@ div(ng-include='"components/navbar/navbar.html"')
 main.no-sidebar
   h1 Settings
 
-
   ul
     li
       = 'Profile Image: '
       span(ng-show="!onEditProfile")
-        img(ng-src="user.profileImage" alt="Profile Image")
+        img.profile-image(ng-src="{{user.profileImg}}" alt="Profile Image")
         a(href="" ng-click="onEditProfile=true") Change
       span(ng-show="onEditProfile")
-        | profile changeing...
+        input#fileInput(type="file")
+        div.cropArea
+          img-crop(image="myImage" result-image="myCroppedImage" area-type="square" result-image-format="image/jpeg")
+        div Cropped Image:
+        div: img(ng-src="{{myCroppedImage}}")
+        button.btn.btn-default(ng-click="updateProfileImage(myCroppedImage)") Update
     li ID: {{user.id}}
     li Email: {{user.email}}
     li

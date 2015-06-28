@@ -30,6 +30,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.ENUM(config.userRoles),
       allowNull: false,
       defaultValue: 'user'
+    },
+    profileImg: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: config.aws.s3Bucket.url + '/profile/default.jpg'
     }
   }, {
     classMethods: {

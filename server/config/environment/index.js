@@ -4,6 +4,7 @@ var path = require('path');
 var _ = require('lodash');
 var dbConfig = require('../config.json')[process.env.NODE_ENV];
 var emailConfig = require('../emailConfig.json')[process.env.NODE_ENV];
+var awsConfig = require('../awsConfig.json')[process.env.NODE_ENV];
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -48,6 +49,17 @@ var all = {
     service: 'Gmail',
     senderAddress: emailConfig.senderAddress,
     password: emailConfig.password
+  },
+
+  // AWS Settings
+  aws: {
+    accessKeyId: awsConfig.accessKeyId,
+    secretAccessKey: awsConfig.secretAccessKey,
+    region: awsConfig.region,
+    s3Bucket: {
+      name: awsConfig.s3Bucket.name,
+      url: awsConfig.s3Bucket.url
+    }
   }
 
 
