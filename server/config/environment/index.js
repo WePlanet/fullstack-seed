@@ -3,6 +3,7 @@
 var path = require('path');
 var _ = require('lodash');
 var dbConfig = require('../config.json')[process.env.NODE_ENV];
+var emailConfig = require('../email-config.json')[process.env.NODE_ENV];
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -44,9 +45,9 @@ var all = {
 
   // Email component
   email: {
-    service: '',
-    senderAddress: '',
-    password: ''
+    service: 'Gmail',
+    senderAddress: emailConfig.senderAddress,
+    password: emailConfig.password
   }
 
 

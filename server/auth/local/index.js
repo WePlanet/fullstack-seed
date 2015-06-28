@@ -2,6 +2,7 @@
 
 var express = require('express');
 var passport = require('passport');
+var shortid = require('shortid');
 var Joi = require('express-joi').Joi;
 var joiValidate = require('express-joi').joiValidate;
 var auth = require('../auth.service');
@@ -31,7 +32,8 @@ function login(req, res, next) {
 }
 
 function resetPassword(req, res) {
-  var newPassword = new Date().getTime().toString().substring(6, 12);
+  //var newPassword = new Date().getTime().toString().substring(6, 12);
+  var newPassword = shortid.generate().toString().substring(0, 6).toLowerCase();
   var newPassword2 = cryptoHelper.md5(newPassword);
 
   User.findOne({where: {email: req.body.email}}).then(function (user) {
@@ -39,11 +41,13 @@ function resetPassword(req, res) {
     user.updateAttributes({password: newPassword2})
         .then(function (affectedCount) {
           if (affectedCount) {
-            email('Reset Password: ' + newPassword, '', user.email).then(function (info) {
-              res.json(info);
-            }, function (error) {
-              res.send(500, error);
-            })
+            email.send('Reset Password: ' + newPassword, '', user.email)
+                .then(function (info) {
+                  res.json(info);
+                }, function (err) {
+                  console.error(err);
+                  res.send(500, err);
+                })
           } else {
             res.send(404);
           }

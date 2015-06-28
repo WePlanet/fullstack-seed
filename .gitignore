@@ -7,3 +7,5 @@ dist
 /server/config/local.env.js
 
 server/config/config.json
+
+server/config/email-config.json
