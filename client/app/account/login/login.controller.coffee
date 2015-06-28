@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'moneyApp'
-.controller 'LoginCtrl', ($scope, $location, Auth) ->
+.controller 'LoginCtrl', ($scope, $location, Auth, Log) ->
 
   $scope.user = {}
   $scope.errors = {}
@@ -18,6 +18,9 @@ angular.module 'moneyApp'
     .then ->
       delete $scope.try
       $location.path '/'
+
+      Log.info 'O002', 'agent'
+
     .catch (err) ->
       delete $scope.try
       $scope.errors.other = err.message

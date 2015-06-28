@@ -35,6 +35,9 @@ var all = {
   // List of user roles
   userRoles: ['user', 'operator', 'admin'],
 
+  // List of log types
+  logTags: ['info', 'warn', 'error', 'exception'],
+
   // Mysql
   mysql: {
     username: dbConfig.username,
