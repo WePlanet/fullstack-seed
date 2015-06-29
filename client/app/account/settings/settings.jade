@@ -24,7 +24,7 @@ main.no-sidebar
         = '{{user.name}} '
         a(href="" ng-click="onEditName=true") Change
       span(ng-show="onEditName")
-        form(name="editNameForm" ng-submit="updateName(form)" novalidate=)
+        form(name="editNameForm" ng-submit="updateName(editNameForm)" novalidate=)
           input(type="text" ng-model="editedUser.name" name="name")
           input(type="submit" value="Save")
           button(type="button" ng-click="onEditName=false") Cancel
