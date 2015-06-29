@@ -18,9 +18,7 @@ angular.module 'moneyApp'
     .then ->
       delete $scope.try
       $location.path '/'
-
       Log.info 'O002', 'agent'
-
     .catch (err) ->
       delete $scope.try
       $scope.errors.other = err.message

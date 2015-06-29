@@ -10,7 +10,8 @@ angular.module 'moneyApp', [
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider
-  .otherwise '/'
+  .otherwise () ->
+    window.location.href = '/notfound'
 
   $locationProvider.html5Mode true
   $httpProvider.interceptors.push 'authInterceptor'
