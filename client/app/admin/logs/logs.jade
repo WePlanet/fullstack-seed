@@ -13,7 +13,7 @@ main
         th User
         th Created at
     tbody
-      tr(ng-repeat="log in logs")
+      tr(ng-repeat="log in logs | orderBy:'id':'desc'")
         td(ng-bind="log.id")
         td(ng-bind="log.tag")
         td(ng-bind="log.LogCode.message")
