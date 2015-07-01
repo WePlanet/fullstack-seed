@@ -21,6 +21,7 @@ angular.module 'moneyApp', [
   request: (config) ->
     config.headers = config.headers || {}
     # https://tools.ietf.org/html/rfc6750#page-5
+    # TODO: $cookie.get('token')
     config.headers.Authorization = 'Bearer ' + $cookieStore.get('token') if $cookieStore.get('token')
     config
 

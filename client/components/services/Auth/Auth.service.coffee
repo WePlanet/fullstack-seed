@@ -16,6 +16,9 @@ angular.module 'moneyApp'
       email: user.email,
       password: user.password
     .success (data) ->
+
+      # TODO Have to use $cookie service
+      # $cookie.put('token', data.token, {expire: new Date('expired date')})
       $cookieStore.put 'token', data.token
       currentUser = User.get()
       deferred.resolve data
