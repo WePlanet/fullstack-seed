@@ -14,7 +14,8 @@ angular.module 'moneyApp'
     $scope.try = true
     Auth.login
       email: $scope.user.email
-      password: $scope.user.password
+      password: $scope.user.password,
+      $scope.stayLogin
     .then ->
       delete $scope.try
       $location.path '/'

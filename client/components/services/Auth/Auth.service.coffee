@@ -1,25 +1,25 @@
 'use strict'
 
 angular.module 'moneyApp'
-.factory 'Auth', ($location, $rootScope, $http, User, $cookieStore, $q) ->
+.factory 'Auth', ($location, $rootScope, $http, User, $cookies, $q, Constants) ->
   currentUser = {}
-  currentUser = User.get() if $cookieStore.get 'token'
+  currentUser = User.get() if $cookies.get 'token'
 
   logout = ->
-    $cookieStore.remove 'token'
+    $cookies.remove 'token'
     currentUser = {}
 
-  login = (user) ->
+  login = (user, stayLogin) ->
     deferred = $q.defer()
 
     $http.post '/auth/local',
       email: user.email,
       password: user.password
     .success (data) ->
-
-      # TODO Have to use $cookie service
-      # $cookie.put('token', data.token, {expire: new Date('expired date')})
-      $cookieStore.put 'token', data.token
+      if stayLogin
+        $cookies.put 'token', data.token, {expires: Constants.cookieExpires()}
+      else
+        $cookies.put 'token', data.token
       currentUser = User.get()
       deferred.resolve data
     .error (err) ->
