@@ -182,7 +182,8 @@ module.exports = function (grunt) {
             '!<%= yeoman.dist %>/.git*',
             '!<%= yeoman.dist %>/.openshift',
             '!<%= yeoman.dist %>/Procfile',
-            '!<%= yeoman.dist %>/node_modules'
+            '!<%= yeoman.dist %>/node_modules',
+            '!<%= yeoman.dist %>/.elasticbeanstalk'
           ]
         }]
       },

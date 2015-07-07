@@ -21,7 +21,7 @@ models.LogCode.bulkCreate([
       {name: 'todo1'},
       {name: 'todo2'}
     ]).then(function () {
-      console.log('INFO', 'Seed date was inserted.')
+      console.log('INFO', 'Seed data was inserted.')
     });
   });
 });

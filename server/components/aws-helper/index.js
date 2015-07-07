@@ -1,7 +1,7 @@
 'use strict';
 
 var Q = require('q');
-var AWS = require('AWS-sdk');
+var AWS = require('aws-sdk');
 var config = require('../../config/environment');
 AWS.config.update({
   accessKeyId: config.aws.accessKeyId,
