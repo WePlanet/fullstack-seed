@@ -2,7 +2,7 @@
 
 angular.module 'moneyApp'
 .directive 'emailValidator', ->
-  EMAIL_REGEXP = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9!#$%&'*+/=?^_`{|}~.-]+\.[a-z0-9!#$%&'*+/=?^_`{|}~.-]+/
+  EMAIL_REGEXP = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+/
 
   require: 'ngModel'
   restrict: ''
