@@ -27,11 +27,13 @@ require('./routes')(app);
 models.sequelize.sync({force: true}).then(function () {
 
   // Insert seed data
-  if(config.seedDB) { require('./config/seed'); }
+  require('./config/seed').insert(config.seedDB).then(function (result) {
+    if (result) console.log('INFO', 'Seed data was inserted.');
 
-  // Start server
-  server.listen(config.port, config.ip, function () {
-    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+    // Start server
+    server.listen(config.port, config.ip, function () {
+      console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+    });
   });
 });
 
