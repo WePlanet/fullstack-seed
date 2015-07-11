@@ -38,20 +38,20 @@ function resetPassword(req, res) {
 
   User.findOne({where: {email: req.body.email}}).then(function (user) {
     if (!user) return res.status(404).send();
-    user.updateAttributes({password: newPassword2})
-        .then(function (affectedCount) {
-          if (affectedCount) {
-            email.send('Reset Password: ' + newPassword, '', user.email)
-                .then(function (info) {
-                  res.json(info);
-                }, function (err) {
-                  console.error(err);
-                  res.send(500, err);
-                })
-          } else {
-            res.send(404);
-          }
-        });
+    user.updateAttributes({
+      password: newPassword2
+    }).then(function (affectedCount) {
+      if (affectedCount) {
+        email.send('Reset Password: ' + newPassword, '', user.email).then(function (info) {
+          res.json(info);
+        }, function (err) {
+          console.error(err);
+          res.send(500, err);
+        })
+      } else {
+        res.send(404);
+      }
+    });
   });
 }
 
