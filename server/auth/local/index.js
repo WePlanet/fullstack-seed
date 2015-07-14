@@ -32,14 +32,12 @@ function login(req, res, next) {
 }
 
 function resetPassword(req, res) {
-  //var newPassword = new Date().getTime().toString().substring(6, 12);
   var newPassword = shortid.generate().toString().substring(0, 6).toLowerCase();
-  var newPassword2 = cryptoHelper.md5(newPassword);
 
   User.findOne({where: {email: req.body.email}}).then(function (user) {
     if (!user) return res.status(404).send();
     user.updateAttributes({
-      password: newPassword2
+      password: cryptoHelper.md5(newPassword)
     }).then(function (affectedCount) {
       if (affectedCount) {
         email.send('Reset Password: ' + newPassword, '', user.email).then(function (info) {

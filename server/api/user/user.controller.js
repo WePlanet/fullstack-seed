@@ -46,7 +46,7 @@ exports.create = function (req, res) {
 exports.update = function (req, res) {
   var updateValues = {
     name: req.body.name,
-    password: cryptoHelper.md5(req.body.password)
+    password: cryptoHelper.md5(req.body.newPassword)
   };
   updateValues = _.omit(updateValues, function (value, key, list) {
     return value === undefined;
@@ -55,9 +55,13 @@ exports.update = function (req, res) {
     return res.status(400).send();
   }
 
+  var whereCond = {id: req.user.id};
+  if (req.body.oldPassword) whereCond.password = cryptoHelper.md5(req.body.oldPassword);
   User.find({
-    where: {id: req.user.id}
+    where: whereCond
   }).then(function (user) {
+    console.log(user);
+    if (!user) return res.send(404);
     user.updateAttributes(updateValues).then(function (data) {
       res.json(data);
     }, function (err) {

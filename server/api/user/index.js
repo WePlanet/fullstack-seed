@@ -2,7 +2,6 @@
 
 var express = require('express');
 var controller = require('./user.controller');
-var Joi = require('express-joi').Joi;
 var router = express.Router();
 var auth = require('../../auth/auth.service');
 
