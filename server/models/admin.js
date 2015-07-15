@@ -3,12 +3,17 @@
 var config = require('../config/environment');
 
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
+  var Admin = sequelize.define('Admin', {
     id: {
       type: DataTypes.BIGINT.UNSIGNED,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false
+    },
+    role: {
+      type: DataTypes.ENUM(config.roles.slice(0)), // remove 'user'
+      allowNull: false,
+      defaultValue: 'user'
     },
     email: {
       type: DataTypes.STRING,
@@ -26,11 +31,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    role: {
-      type: DataTypes.ENUM(config.userRoles),
-      allowNull: false,
-      defaultValue: 'user'
-    },
     profileImg: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -39,11 +39,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
-        //User.hasMany(models.Log, {constraints: false});
-        //User.hasMany(models.Log);
       }
     }
   });
-  return User;
+  return Admin;
 };
